@@ -159,21 +159,21 @@ async def start(client, message):
             if stored_token is None:
                 return await send_message(
                     message,
-                    "<b>This token is not for you!</b>\n\nPlease generate your own.",
+                    "<blockquote><b>This token is not for you!</b>\n\nPlease generate your own.</blockquote>",
                 )
             if input_token != stored_token:
                 return await send_message(
-                    message, "Invalid token.\n\nPlease generate a new one."
+                    message, "<blockquote>Invalid token.\n\nPlease generate a new one.</blockquote>"
                 )
         if userid not in user_data:
             return await send_message(
-                message, "This token is not yours!\n\nKindly generate your own."
+                message, "<blockquote>This token is not yours!\n\nKindly generate your own.</blockquote>"
             )
         data = user_data[userid]
         if "token" not in data or data["token"] != input_token:
             return await send_message(
                 message,
-                "<b>This token has already been used!</b>\n\nPlease get a new one.",
+                "<blockquote><b>This token has already been used!</b>\n\nPlease get a new one.</blockquote>",
             )
         token = str(uuid4())
         token_time = time()
@@ -182,21 +182,21 @@ async def start(client, message):
         user_data[userid].update(data)
         if DATABASE_URL:
             await DbManager().update_user_tdata(userid, token, token_time)
-        msg = "Your token has been successfully generated!\n\n"
+        msg = "<blockquote>Your token has been successfully generated!</blockquote>\n\n"
         msg += f'It will be valid for {get_readable_time(int(config_dict["TOKEN_TIMEOUT"]), True)}'
         return await send_message(message, msg)
     elif await CustomFilters.authorized(client, message):
         help_command = f"/{BotCommands.HelpCommand}"
-        start_string = f"This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram.\n<b>Type {help_command} to get a list of available commands</b>"
+        start_string = f"<blockquote>This bot can mirror all your links|files|torrents to Google Drive or any rclone cloud or to telegram.\n<b>Type {help_command} to get a list of available commands</b></blockquote>"
         await send_message(message, start_string, photo="Random")
     else:
-        await send_message(message, "You are not a authorized user!", photo="Random")
+        await send_message(message, "<blockquote>You are not a authorized user!</blockquote>", photo="Random")
     await DbManager().update_pm_users(message.from_user.id)
     return None
 
 
 async def restart(_, message):
-    restart_message = await send_message(message, "Restarting...")
+    restart_message = await send_message(message, "<blockquote>Restarting...</blockquote>")
     if scheduler.running:
         scheduler.shutdown(wait=False)
     for interval in [QbInterval, Interval]:
@@ -215,7 +215,7 @@ async def restart(_, message):
 
 async def ping(_, message):
     start_time = int(round(time() * 1000))
-    reply = await send_message(message, "Starting ping...")
+    reply = await send_message(message, "<blockquote>Starting ping...</blockquote>")
     end_time = int(round(time() * 1000))
     value = end_time - start_time
     await edit_message(reply, f"{value} ms.")
@@ -289,7 +289,7 @@ async def restart_notification():
             chat_id, msg_id = map(int, f)
         with contextlib.suppress(Exception):
             await bot.edit_message_text(
-                chat_id=chat_id, message_id=msg_id, text="Restarted Successfully!"
+                chat_id=chat_id, message_id=msg_id, text="<blockquote>Restarted Successfully!</blockquote>"
             )
         await aioremove(".restartmsg")
 
