@@ -234,8 +234,8 @@ def progress_bar(pct):
         pct = float(pct.strip("%"))
     p = min(max(pct, 0), 100)
     c_full = int((p + 5) // 10)
-    p_str = '◉' * cFull
-    p_str += '◎' * (10 - cFull)
+    p_str = '◉' * c_Full
+    p_str += '◎' * (10 - c_Full)
     return p_str
 
 
