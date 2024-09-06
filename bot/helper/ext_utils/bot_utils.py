@@ -234,8 +234,8 @@ def progress_bar(pct):
         pct = float(pct.strip("%"))
     p = min(max(pct, 0), 100)
     c_full = int((p + 5) // 10)
-    p_str = "🟩" * c_full
-    p_str += "🟥" * (10 - c_full)
+    p_str = "■" * c_full
+    p_str += "□" * (10 - c_full)
     return p_str
 
 
@@ -249,7 +249,7 @@ def source(self):
 
 def get_readable_message():
     msg = f'<a href="https://t.me/TELLYCLOUD_Bots"><b>⚡ 𝐓𝐄𝐋𝐋𝐘𝐂𝐋𝐎𝐔𝐃 𝐁𝐎𝐓𝐒™</b></a>'
-    msg += f'\n'
+    msg += f'\n\n'
     button = None
     tasks = len(download_dict)
     current_time = get_readable_time(time() - bot_start_time)
@@ -271,7 +271,7 @@ def get_readable_message():
             MirrorStatus.STATUS_SEEDING,
             MirrorStatus.STATUS_PROCESSING,
         ]:
-            msg += f"\n<blockquote>🎡  <b>{progress_bar(download.progress())}</b> ≫ <b>{download.progress()}"
+            msg += f"\n🎡  <b>{progress_bar(download.progress())}</b> ≫ <b>{download.progress()}"
             msg += f"\n🔄 <b><code>Status   :</code> {download.processed_bytes()} of {download.size()}</b>"
             msg += f"\n⚡ <b><code>Speed    :</code> {download.speed()}</b>"
             msg += f'\n💣 <b><code>Estimated:</code> {download.eta()}</b>'
@@ -287,8 +287,8 @@ def get_readable_message():
             msg += f"\n⌚ <code>Time     :</code> {download.seeding_time()}"
         else:
             msg += f"\n📐 <code>Size     :</code> {download.size()}"
-        msg += f"\n⏱ <code>Elapsed  :</code> {get_readable_time(time() - download.message.date.timestamp())}</blockquote>"
-        msg += f"\n<blockquote>❌  /stop_{download.gid()[:8]}</blockquote>\n\n"
+        msg += f"\n⏱ <code>Elapsed  :</code> {get_readable_time(time() - download.message.date.timestamp())}"
+        msg += f"\n❌  /stop_{download.gid()[:8]}\n\n"
     if len(msg) == 0:
         return None, None
     if tasks > STATUS_LIMIT:
@@ -297,9 +297,9 @@ def get_readable_message():
         buttons.callback(f"{PAGE_NO}/{PAGES}", "status ref")
         buttons.callback("Next", "status nex")
         button = buttons.column(3)
-    msg += f"<blockquote><b>🧮 Tasks</b> : {tasks}{bmax_task}"
+    msg += f"<b>🧮 Tasks</b> : {tasks}{bmax_task}"
     msg += f"\n<b>🕛 <code>Bot Uptime</b>     :</code> {current_time}"
-    msg += f"\n<b>🆓 <code>Free Disk Space</b>:</code> {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}</blockquote>"
+    msg += f"\n<b>🆓 <code>Free Disk Space</b>:</code> {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
     return msg, button
 
 
