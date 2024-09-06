@@ -298,7 +298,7 @@ def get_readable_message():
         buttons.callback("Next", "status nex")
         button = buttons.column(3)
     msg += f"<blockquote><b>🧮 Tasks</b> : {tasks}{bmax_task}"
-    msg += f"\n<b>🕛 <code>Bot Uptime</b>     :</code> {currentTime}"
+    msg += f"\n<b>🕛 <code>Bot Uptime</b>     :</code> {current_time}"
     msg += f"\n<b>🆓 <code>Free Disk Space</b>:</code> {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}</blockquote>"
     return msg, button
 
