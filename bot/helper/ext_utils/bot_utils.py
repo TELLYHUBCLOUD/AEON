@@ -270,7 +270,7 @@ def get_readable_message():
             MirrorStatus.STATUS_SEEDING,
             MirrorStatus.STATUS_PROCESSING,
         ]:
-            msg += f"\n🎡 <b>{progress_bar(download.progress())}</b> ≫ <b>{download.progress()}<b>"
+            msg += f"\n🎡 <b>{progress_bar(download.progress())}</b>  » <b>{download.progress()}</b>"
             msg += f"\n<blockquote>🔄 <b><code>Status   :</code> {download.processed_bytes()} of {download.size()}</b>"
             msg += f"\n⚡ <b><code>Speed    :</code> {download.speed()}</b>"
             msg += f'\n💣 <b><code>Estimated:</code> {download.eta()}</b>'
