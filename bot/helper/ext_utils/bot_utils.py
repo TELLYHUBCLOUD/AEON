@@ -230,21 +230,12 @@ async def fetch_user_tds(user_id, force=False):
 
 
 def progress_bar(pct):
-    # Check if input is a string and strip the '%' symbol
     if isinstance(pct, str):
         pct = float(pct.strip("%"))
-    
-    # Ensure percentage is within 0 to 100
     p = min(max(pct, 0), 100)
-
-    # Calculate how many full blocks to show (out of 10)
     c_full = int(p // 10)
-
-    # Build the progress bar string
     p_str = "■" * c_full
     p_str += "□" * (10 - c_full)
-
-    # Return the progress bar wrapped in a clickable link
     return f'<p><a href="https://t.me/tellycloud_bots">{p_str}</a></p>'
 
 def source(self):
@@ -256,7 +247,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = f'<a href="https://t.me/TELLYCLOUD_Bots"><b>⚡ 𝐓𝐄𝐋𝐋𝐘𝐂𝐋𝐎𝐔𝐃 𝐁𝐎𝐓𝐒™</b></a>'
+    msg = f'<blockquote><a href="https://t.me/TELLYCLOUD_Bots"><b>✩ ✅ ₱Ø₩ɆⱤ ฿Ɏ ₮ɆⱠⱠɎ₵ⱠØɄĐ ฿Ø₮₴ 🤖 </b></a></blockquote>'
     msg += f'\n\n'
     button = None
     tasks = len(download_dict)
@@ -279,7 +270,7 @@ def get_readable_message():
             MirrorStatus.STATUS_SEEDING,
             MirrorStatus.STATUS_PROCESSING,
         ]:
-            msg += f"\n🎡  <b>{progress_bar(download.progress())}</b> ≫ <b>{download.progress()}"
+            msg += f"\n🎡 <b>{progress_bar(download.progress())}</b> ≫ <b>{download.progress()}<b>"
             msg += f"\n🔄 <b><code>Status   :</code> {download.processed_bytes()} of {download.size()}</b>"
             msg += f"\n⚡ <b><code>Speed    :</code> {download.speed()}</b>"
             msg += f'\n💣 <b><code>Estimated:</code> {download.eta()}</b>'
