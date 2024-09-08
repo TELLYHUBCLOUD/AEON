@@ -236,7 +236,7 @@ def progress_bar(pct):
     c_full = int((p + 5) // 10)
     p_str = "■" * c_full
     p_str += "□" * (10 - c_full)
-    return f'<a href="https://t.me/TELLYCLOUD_Bots"><b> p_str </b></a>
+    return <p><a href="https://target_link" target="p_str"</b></a>
 
 
 def source(self):
