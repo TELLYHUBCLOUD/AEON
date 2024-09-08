@@ -230,13 +230,22 @@ async def fetch_user_tds(user_id, force=False):
 
 
 def progress_bar(pct):
+    # Check if input is a string and strip the '%' symbol
     if isinstance(pct, str):
         pct = float(pct.strip("%"))
+    
+    # Ensure percentage is within 0 to 100
     p = min(max(pct, 0), 100)
-    c_full = int((p + 5) // 10)
+
+    # Calculate how many full blocks to show (out of 10)
+    c_full = int(p // 10)
+
+    # Build the progress bar string
     p_str = "■" * c_full
     p_str += "□" * (10 - c_full)
-    return f'<p><a href="https://target_link" target="_blank">{p_str}</a></p>'
+
+    # Return the progress bar wrapped in a clickable link
+    return f'<p><a href="https://t.me/tellycloud_bots">{p_str}</a></p>'
 
 def source(self):
     return (
