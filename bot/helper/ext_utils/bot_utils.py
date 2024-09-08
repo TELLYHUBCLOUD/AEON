@@ -264,14 +264,14 @@ def get_readable_message():
         STATUS_START : STATUS_LIMIT + STATUS_START
     ]:
         msg += f"<b>{download.status()}:</b> {escape(f'{download.name()}')}\n"
-        msg += f"by {source(download)}\n"
+        msg += f"👤 Name: {source(download)}\n"
         if download.status() not in [
             MirrorStatus.STATUS_SPLITTING,
             MirrorStatus.STATUS_SEEDING,
             MirrorStatus.STATUS_PROCESSING,
         ]:
             msg += f"\n🎡 <b>{progress_bar(download.progress())}</b> ≫ <b>{download.progress()}<b>"
-            msg += f"\n🔄 <b><code>Status   :</code> {download.processed_bytes()} of {download.size()}</b>"
+            msg += f"\n<blockquote>🔄 <b><code>Status   :</code> {download.processed_bytes()} of {download.size()}</b>"
             msg += f"\n⚡ <b><code>Speed    :</code> {download.speed()}</b>"
             msg += f'\n💣 <b><code>Estimated:</code> {download.eta()}</b>'
             if hasattr(download, "seeders_num"):
@@ -286,8 +286,8 @@ def get_readable_message():
             msg += f"\n⌚ <code>Time     :</code> {download.seeding_time()}"
         else:
             msg += f"\n📐 <code>Size     :</code> {download.size()}"
-        msg += f"\n⏱ <code>Elapsed  :</code> {get_readable_time(time() - download.message.date.timestamp())}"
-        msg += f"\n❌  /stop_{download.gid()[:8]}\n\n"
+        msg += f"\n⏱ <code>Elapsed  :</code> {get_readable_time(time() - download.message.date.timestamp())}</blockquote>"
+        msg += f"\n<blockquote>❌  /stop_{download.gid()[:8]}</blockquote>\n\n"
     if len(msg) == 0:
         return None, None
     if tasks > STATUS_LIMIT:
@@ -296,9 +296,9 @@ def get_readable_message():
         buttons.callback(f"{PAGE_NO}/{PAGES}", "status ref")
         buttons.callback("Next", "status nex")
         button = buttons.column(3)
-    msg += f"<b>🧮 Tasks</b> : {tasks}{bmax_task}"
+    msg += f"<b><blockquote>🧮 Tasks</b>        : {tasks}{bmax_task}"
     msg += f"\n<b>🕛 <code>Bot Uptime</b>     :</code> {current_time}"
-    msg += f"\n<b>🆓 <code>Free Disk Space</b>:</code> {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
+    msg += f"\n<b>🆓 <code>Free Disk Space</b>:</code> {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}</blockquote>"
     return msg, button
 
 
