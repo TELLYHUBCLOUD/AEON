@@ -234,8 +234,8 @@ def progress_bar(pct):
         pct = float(pct.strip("%"))
     p = min(max(pct, 0), 100)
     c_full = int(p // 10)
-    p_str = "■" * c_full
-    p_str += "□" * (10 - c_full)
+    p_str = "▣" * c_full
+    p_str += "▢" * (10 - c_full)
     return f'<p><a href="https://t.me/tellycloud_bots">{p_str}</a></p>'
 
 def source(self):
