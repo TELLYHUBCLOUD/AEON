@@ -247,7 +247,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = f'<blockquote><a href="https://t.me/TELLYCLOUD_Bots"><b>✩ ✅ ₱Ø₩ɆⱤ ฿Ɏ ₮ɆⱠⱠɎ₵ⱠØɄĐ ฿Ø₮₴ 🤖 </b></a></blockquote>'
+    msg = f'<blockquote><a href="https://t.me/TELLYCLOUD_Bots"><b>✅ █POWER BY TELLYCLOUD BOTS█ 🤖</b></a></blockquote>'
     msg += f'\n\n'
     button = None
     tasks = len(download_dict)
