@@ -466,13 +466,13 @@ class MirrorLeechListener:
     ):
         user_id = self.message.from_user.id
         name, _ = await process_file(name, user_id, is_mirror=not self.is_leech)
-        msg = f"{escape(name)}\n\n"
+        msg = f"<blockquote>{escape(name)}</blockquote>\n\n"
         msg += f"<blockquote><b>• Size: </b>{get_readable_file_size(size)}\n"
         msg += f"<b>• Elapsed: </b>{get_readable_time(time() - self.message.date.timestamp())}\n"
         LOGGER.info(f"Task Done: {name}")
         buttons = ButtonMaker()
         inboxButton = ButtonMaker()
-        inboxButton.callback("View in inbox", f"aeon {user_id} private", "header")
+        inboxButton.callback("𝐕𝐢𝐞𝐰 𝐢𝐧 𝐢𝐧𝐛𝐨𝐱", f"aeon {user_id} private", "header")
         inboxButton = extra_btns(inboxButton)
         if self.is_leech:
             if folders > 1:
@@ -484,13 +484,13 @@ class MirrorLeechListener:
             if not files:
                 if self.isPrivate:
                     msg += (
-                        "<b>Files have not been sent for an unspecified reason</b>"
+                        "<blockquote><b>Files have not been sent for an unspecified reason</b></blockquote>"
                     )
                 await send_message(self.message, msg)
             else:
                 attachmsg = True
                 fmsg, totalmsg = "\n\n", ""
-                lmsg = "<b>Files have been sent. Access them via the provided links.</b>"
+                lmsg = "<blockquote><b>Files have been sent. Access them via the provided links.</blockquote></b>"
                 for index, (dlink, name) in enumerate(files.items(), start=1):
                     fmsg += f"{index}. <a href='{dlink}'>{name}</a>\n"
                     totalmsg = (msg + lmsg + fmsg) if attachmsg else fmsg
@@ -512,7 +512,7 @@ class MirrorLeechListener:
                 if self.isSuperGroup:
                     await send_message(
                         self.message,
-                        f"{msg}<b>Files has been sent to your inbox</b>",
+                        f"<blockquote>{msg}<b>Files has been sent to your inbox</b></blockquote>",
                         inboxButton.column(1),
                     )
                 else:
